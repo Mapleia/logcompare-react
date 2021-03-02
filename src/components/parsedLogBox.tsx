@@ -60,8 +60,21 @@ export default function ParsedLogBox(props: {data: FinalReport | undefined, isEm
           subheader={`${props.data.metadata.permaLink} \n LogCompare ID: ${props.data.metadata.tryID}`}
         />
         <CardContent>
-          <OverallChart data={props.data.data}/>
-          
+          <OverallChart data={props.data.data.filter((item) => {
+            return item.archetype === "DPS"
+          }).sort((a, b) => {
+            return a.percentrankdps - b.percentrankdps
+          })} title={"DPS: Compare Percentiles"}/>
+
+          <OverallChart data={props.data.data.filter((item) => {
+            return item.archetype === "SUPPORT"
+          }).sort((a, b) => {
+            return a.percentrankdps - b.percentrankdps
+          })} title={"SUPPORT: Compare Percentiles"}/>
+
+          <OverallChart data={props.data.data.filter((item) => {
+            return item.archetype === "HEALER"
+          })} title={"HEALER: Compare Percentiles"}/>
         </CardContent>
       </Card>
     );

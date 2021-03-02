@@ -25,7 +25,7 @@ export default function App() {
   const [reports, setReports] = useState<Map<string, FinalReport>>(new Map()); // Filename: FinalReport
   const [progress, setProgress] = useState<Map<string, number>>(new Map()); // Filename: progress
   const [activeID, setActiveID] = useState<string>('');
-  const API_LINK = 'http://127.0.0.1:8000';
+  const API_LINK = 'https://mapleia.pythonanywhere.com';
   const ORIGIN = 'http://mapleia.github.io';
   const classes = useStyles();
 
@@ -87,10 +87,19 @@ export default function App() {
         continue;
       }
       try {
+        setProgress((prevState) => {
+          return new Map(prevState).set(file.name, 10);
+        })
         // Upload to dps.report
         // get permaLink and ID
+        const DR_HEADER = new Headers();
+        DR_HEADER.append("Access-Control-Allow-Headers", "Origin, Content-Type");
+        DR_HEADER.append("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        DR_HEADER.append("Access-Control-Max-Age", "86400");
+        DR_HEADER.append("Access-Control-Origin", ORIGIN);
+
         const DR_UPLOAD = await fetch('https://dps.report/uploadContent', 
-        { method: 'POST', body: get_form(file)});
+        { method: 'POST', body: get_form(file), headers: DR_HEADER});
 
         const DR_META = await DR_UPLOAD.json();
         console.log(DR_META);
