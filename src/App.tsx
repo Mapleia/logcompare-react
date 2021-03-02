@@ -35,7 +35,6 @@ export default function App() {
   const [progress, setProgress] = useState<Map<string, number>>(new Map()); // Filename: progress
   const [activeID, setActiveID] = useState<string>("");
   const API_LINK = "https://mapleia.pythonanywhere.com";
-  const ORIGIN = "http://mapleia.github.io";
   const classes = useStyles();
 
   async function getData(file: File): Promise<FinalReport | null> {
@@ -58,9 +57,7 @@ export default function App() {
           {
             method: "POST",
             headers: {
-              "Access-Control-Allow-Origin": ORIGIN,
               "Content-Type": "multipart/form-data",
-              "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
             },
             body: formData,
           }
