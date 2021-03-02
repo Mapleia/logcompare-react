@@ -2,7 +2,7 @@ export interface ParsedReport {
     tryID: string;
     fightName: string;
     fightIcon: string;
-    permaLink?: string;
+    permaLink: string;
 }
 
 export interface PercentileReport {
