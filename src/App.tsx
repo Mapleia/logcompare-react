@@ -96,7 +96,7 @@ export default function App() {
           body: get_form(file),
           headers: {
             'mode': 'cors',
-            'Origin': ORIGIN,
+            'Access-Control-Allow-Origin': ORIGIN,
             'Content-Type': 'multipart/form-data',
             'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
           } 
