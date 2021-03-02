@@ -50,15 +50,12 @@ export default function App() {
         // Create new form with file.
         let formData = new FormData();
         formData.append("file", file);
-
+        console.log(formData.get("file"));
         // Post to Log Compare API.
         var jsonData = await fetch(
           `${API_LINK}/api/encounters/upload_report/`,
           {
             method: "POST",
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
             body: formData,
           }
         );
