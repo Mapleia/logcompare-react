@@ -25,9 +25,8 @@ export default function App() {
   const [reports, setReports] = useState<Map<string, FinalReport>>(new Map()); // Filename: FinalReport
   const [progress, setProgress] = useState<Map<string, number>>(new Map()); // Filename: progress
   const [activeID, setActiveID] = useState<string>('');
-  const API_LINK = 'https://mapleia.pythonanywhere.com';
-  const ORIGIN = 'http://mapleia.github.io/logcompare-react';
-
+  const API_LINK = 'http://127.0.0.1:8000';
+  const ORIGIN = 'http://mapleia.github.io';
   const classes = useStyles();
 
   async function getData(pid: string) : Promise<FinalReport | null> {
@@ -43,7 +42,7 @@ export default function App() {
               method: 'POST',
               headers: {
                 'mode': 'cors',
-                'Origin': ORIGIN,
+                'Access-Control-Allow-Origin': ORIGIN,
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
             }});
@@ -91,18 +90,11 @@ export default function App() {
         // Upload to dps.report
         // get permaLink and ID
         const DR_UPLOAD = await fetch('https://dps.report/uploadContent', 
-        { 
-          method: 'POST',
-          body: get_form(file),
-          headers: {
-            'mode': 'cors',
-            'Access-Control-Allow-Origin': ORIGIN,
-            'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
-          } 
-        });
+        { method: 'POST', body: get_form(file)});
+
         const DR_META = await DR_UPLOAD.json();
         console.log(DR_META);
+
         setProgress((prevState) => {
           return new Map(prevState).set(file.name, 30);
         })
