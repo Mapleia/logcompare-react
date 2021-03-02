@@ -25,8 +25,9 @@ export default function App() {
   const [reports, setReports] = useState<Map<string, FinalReport>>(new Map()); // Filename: FinalReport
   const [progress, setProgress] = useState<Map<string, number>>(new Map()); // Filename: progress
   const [activeID, setActiveID] = useState<string>('');
-  const API_LINK = 'http://127.0.0.1:8000';
-  
+  const API_LINK = 'https://mapleia.pythonanywhere.com';
+  const ORIGIN = 'http://mapleia.github.io/logcompare-react';
+
   const classes = useStyles();
 
   async function getData(pid: string) : Promise<FinalReport | null> {
@@ -34,7 +35,7 @@ export default function App() {
       try {  
           const HEADER = {
               'mode': 'cors',
-              'Origin': 'http://localhost:3000',
+              'Origin': ORIGIN,
               'Content-Type': 'application/json',
               'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
           };
@@ -82,7 +83,7 @@ export default function App() {
 
     const header = {
       'mode': 'cors',
-      'Origin': 'http://localhost:3000',
+      'Origin': ORIGIN,
       'Content-Type': 'multipart/form-data',
       'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
     };
@@ -100,7 +101,7 @@ export default function App() {
         { 
           method: 'POST',
           body: get_form(file),
-          //headers: header 
+          headers: header 
         });
         const DR_META = await DR_UPLOAD.json();
         console.log(DR_META);
