@@ -32,20 +32,21 @@ export default function App() {
 
   async function getData(pid: string) : Promise<FinalReport | null> {
     if (pid) {
-      try {  
-          const HEADER = {
-              'mode': 'cors',
-              'Origin': ORIGIN,
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
-          };
-
+      try { 
           // send dps.report id
           // upload_report will
           //   1. get from /getJson?id=dr_id 
           //   2. save to logcompare db
           //   3. return ParsedReport json
-          var jsonData = await fetch(`${API_LINK}/api/encounters/upload_report/?id=${pid}`, {method: 'POST', headers: HEADER});
+          var jsonData = await fetch(`${API_LINK}/api/encounters/upload_report/?id=${pid}`,
+           {
+              method: 'POST',
+              headers: {
+                'mode': 'cors',
+                'Origin': ORIGIN,
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
+            }});
 
           if (jsonData.ok) {
               const PARSED: ParsedReport = await jsonData.json();
@@ -81,14 +82,6 @@ export default function App() {
       return formData;
     }
 
-    const header = {
-      'mode': 'cors',
-      'Origin': ORIGIN,
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
-    };
-
-    console.log(header);
     // For each parsed json file, upload to log compare database and set progress to 100
     for(const file of files) {
       if (progress.get(file.name) !== 0) {
@@ -101,7 +94,12 @@ export default function App() {
         { 
           method: 'POST',
           body: get_form(file),
-          headers: header 
+          headers: {
+            'mode': 'cors',
+            'Origin': ORIGIN,
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS'
+          } 
         });
         const DR_META = await DR_UPLOAD.json();
         console.log(DR_META);
