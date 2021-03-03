@@ -1,7 +1,7 @@
 {
-  "name": "logcompare-react",
+  "name": "logcompare",
   "version": "0.1.0",
-  "homepage": "http://mapleia.github.io/logcompare-react",
+  "homepage": "http://mapleia.github.io/LogCompare",
   "private": true,
   "dependencies": {
     "@devexpress/dx-react-chart": "^2.7.4",
