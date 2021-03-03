@@ -34,7 +34,7 @@ export default function App() {
   const [reports, setReports] = useState<Map<string, FinalReport>>(new Map()); // Filename: FinalReport
   const [progress, setProgress] = useState<Map<string, number>>(new Map()); // Filename: progress
   const [activeID, setActiveID] = useState<string>("");
-  const API_LINK = "https://mapleia.pythonanywhere.com";
+  const API_LINK = "https://logcompare.herokuapp.com";
   const classes = useStyles();
 
   async function getData(file: File): Promise<FinalReport | null> {
