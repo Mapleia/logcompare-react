@@ -1,5 +1,4 @@
-import { Avatar, Card, CardContent, CardHeader, makeStyles,} from "@material-ui/core";
-import React from "react";
+import { Avatar, Card, CardContent, CardHeader, makeStyles, Link} from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import OverallChart from "./OverallChart";
 import { FinalReport } from '../interfaces';
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ParsedLogBox(props: {data: FinalReport | undefined, isEmpty: boolean}) {
   const classes = useStyles();
-
+  
   if (!props.data)
     return (
       <Card variant="outlined">
@@ -52,12 +51,12 @@ export default function ParsedLogBox(props: {data: FinalReport | undefined, isEm
             <Avatar
               variant="square"
               className={classes.large}
-              alt={props.data.metadata.fightName}
-              src={props.data.metadata.fightIcon}
+              alt={props.data.metadata.name}
+              src={props.data.metadata.icon}
             />
           }
-          title={props.data.metadata.fightName}
-          subheader={`${props.data.metadata.permaLink} \n LogCompare ID: ${props.data.metadata.tryID}`}
+          title={props.data.metadata.name}
+          subheader={<Link href={props.data.metadata.permaLink}>{props.data.metadata.permaLink}</Link>}
         />
         <CardContent>
           <OverallChart data={props.data.data.filter((item) => {
