@@ -51,27 +51,27 @@ export default function ParsedLogBox(props: {data: FinalReport | undefined, isEm
             <Avatar
               variant="square"
               className={classes.large}
-              alt={props.data.metadata.name}
-              src={props.data.metadata.icon}
+              alt={props.data.metadata?.name}
+              src={props.data.metadata?.icon}
             />
           }
-          title={props.data.metadata.name}
-          subheader={<Link href={props.data.metadata.permaLink}>{props.data.metadata.permaLink}</Link>}
+          title={props.data.metadata?.name}
+          subheader={<Link href={props.data.metadata?.permaLink}>{props.data.metadata?.permaLink}</Link>}
         />
         <CardContent>
-          <OverallChart data={props.data.data.filter((item) => {
+          <OverallChart data={props.data.data?.filter((item) => {
             return item.archetype === "DPS"
           }).sort((a, b) => {
             return a.percentrankdps - b.percentrankdps
           })} title={"DPS: Compare Percentiles"}/>
 
-          <OverallChart data={props.data.data.filter((item) => {
+          <OverallChart data={props.data.data?.filter((item) => {
             return item.archetype === "SUPPORT"
           }).sort((a, b) => {
             return a.percentrankdps - b.percentrankdps
           })} title={"SUPPORT: Compare Percentiles"}/>
 
-          <OverallChart data={props.data.data.filter((item) => {
+          <OverallChart data={props.data.data?.filter((item) => {
             return item.archetype === "HEALER"
           })} title={"HEALER: Compare Percentiles"}/>
         </CardContent>

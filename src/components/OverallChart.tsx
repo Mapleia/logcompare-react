@@ -3,13 +3,13 @@ import { ArgumentAxis, BarSeries, Chart, ValueAxis, Legend, Title, Tooltip, } fr
 import { ArgumentScale, EventTracker, Stack,ValueScale } from "@devexpress/dx-react-chart";
 import { scaleBand, } from "@devexpress/dx-chart-core";
 
-export default function OverallChart(props: { data: PercentileReport[], title: string }) {
+export default function OverallChart(props: { data: PercentileReport[] | undefined, title: string }) {
   const modifyPercentileDomain = () => [0, 1.0];
 
   return (
     <Chart 
       rotated
-      data={props.data}>
+      data={props.data? props.data : []}>
       <ArgumentScale factory={scaleBand} />
       <ArgumentAxis />
       <ValueScale name="percentile" modifyDomain={modifyPercentileDomain} />

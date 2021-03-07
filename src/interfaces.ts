@@ -19,11 +19,14 @@ export interface PercentileReport {
 }
 
 export interface FinalReport {
-    data: PercentileReport[];
-    metadata: ParsedReport;
-    
+    data?: PercentileReport[];
+    metadata?: ParsedReport;
 }
 
+export enum Progress {
+    Started,
+    Done,
+}
 // # 725 Fury, 740 Might, 1187 Quickness, 30328 Alacrity
 
 export const BOONS = [725, 740, 1187, 30328];
