@@ -124,7 +124,7 @@ export default function App() {
 
     async function handleAddLink(e?: React.FormEvent<HTMLFormElement>) {
         if (e) e.preventDefault();
-        var arr = link.replace(/\n/g, ",").split(",").map((link) => link.trim());
+        var arr = link.replace(/\n/g, ",").split(",").map((link) => link.trim()).filter((link) => !(link === ""));
         var arrLink: string[] = metas.map((meta) => meta.permaLink);
         var filtered = arr.filter((e) => arrLink.indexOf(e) < 0, arrLink);
         console.log(`Links list size: ${arr.length}`);
