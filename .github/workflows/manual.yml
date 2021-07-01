@@ -1,0 +1,10 @@
+name: Build Test
+on: [push]
+jobs:
+  all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Build react
+        run: npm run build
